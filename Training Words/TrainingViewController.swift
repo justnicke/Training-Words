@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  TrainingViewController.swift
 //  Training Words
 //
 //  Created by Nikita Sukachev on 19.05.2020.
@@ -8,11 +8,12 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class TrainingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        view.backgroundColor = .systemBlue
     }
 
 
