@@ -12,6 +12,7 @@
 		5EB466842474231D006812F9 /* TrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB466832474231D006812F9 /* TrainingViewController.swift */; };
 		5EB466892474231E006812F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB466882474231E006812F9 /* Assets.xcassets */; };
 		5EB4668C2474231E006812F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EB4668A2474231E006812F9 /* LaunchScreen.storyboard */; };
+		5EB4669524742708006812F9 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB4669424742708006812F9 /* CustomTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		5EB466882474231E006812F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5EB4668B2474231E006812F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5EB4668D2474231E006812F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5EB4669424742708006812F9 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				5EB466832474231D006812F9 /* TrainingViewController.swift */,
+				5EB4669424742708006812F9 /* CustomTextField.swift */,
 				5EB4669324742353006812F9 /* Supporting Files */,
 			);
 			path = "Training Words";
@@ -142,6 +145,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EB4669524742708006812F9 /* CustomTextField.swift in Sources */,
 				5EB466842474231D006812F9 /* TrainingViewController.swift in Sources */,
 				5EB466802474231D006812F9 /* AppDelegate.swift in Sources */,
 				5EB466822474231D006812F9 /* SceneDelegate.swift in Sources */,
