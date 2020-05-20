@@ -111,6 +111,7 @@ final class TrainingViewController: UIViewController {
         notifyLabel.font = UIFont(name: "AvenirNext-medium", size: 20)
         notifyLabel.translatesAutoresizingMaskIntoConstraints = false
         notifyLabel.textColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+        notifyLabel.alpha = 0
         forTextFieldOrNotifyView.addSubview(notifyLabel)
         
         notifyLabel.topAnchor.constraint(equalTo: forTextFieldOrNotifyView.topAnchor, constant: 30).isActive = true
@@ -189,7 +190,8 @@ final class TrainingViewController: UIViewController {
     }
     
     @objc private func addNewWordButtonTapped(_ sender: UIButton) {
-        print("Hello AddNewWordButtonTapped")
+        notifyAnimation()
+  
     }
     
     @objc private func sendButtonTapped(_ sender: UIButton) {
@@ -210,12 +212,46 @@ final class TrainingViewController: UIViewController {
         let find = russianhWords.firstIndex { $0 == russianWordLabel.text }
         let found = englishWords.firstIndex { $0 == englishCustomTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines) }
         
-        if englishCustomTextField.text != "" {
-            if find == found {
-                russianWordLabel.text = russianhWords.randomElement()
-                englishCustomTextField.text?.removeAll()
-            } else if find != found { }
-        } else if englishCustomTextField.text == "" { }
+        if find == found {
+            russianWordLabel.text = russianhWords.randomElement()
+            englishCustomTextField.text?.removeAll()
+            notifyAnimation()
+        } else if find != found {
+            notifyAnimationWrong()
+        }
+    }
+    
+    func notifyAnimation() {
+        
+        UIView.animate(withDuration: 2) {
+            self.notifyLabel.text = "Wrong"
+            self.notifyLabel.textColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+            self.notifyLabel.alpha = 1
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+            UIView.animate(withDuration: 1) {
+                self.notifyLabel.alpha = 0
+            }
+        }
+
+
+    }
+    
+    func notifyAnimationWrong() {
+        UIView.animate(withDuration: 2) {
+            self.notifyLabel.text = "Wrong"
+            self.notifyLabel.textColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
+            self.notifyLabel.alpha = 1
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+            UIView.animate(withDuration: 1) {
+                self.notifyLabel.alpha = 0
+            }
+        }
+
+
     }
 }
 
