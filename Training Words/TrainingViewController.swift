@@ -9,9 +9,26 @@
 import UIKit
 
 final class TrainingViewController: UIViewController {
-
+    
     // MARK: - Public Properties
-        
+    
+    var englishWords = ["each other",
+                        "separately",
+                        "separate",
+                        "fond of",
+                        "interested in",
+                        "keen on", "some people" ,
+                        "celebrate"]
+    
+    var russianhWords = ["друг друга",
+                         "раздельно",
+                         "разделять",
+                         "обажать (to be)",
+                         "интерес (to be)",
+                         "улвекаться",
+                         "некоторые люди",
+                         "праздновать"]
+    
     // MARK: - Private Properties
     
     private var forRussianWordView:       UIView!
@@ -20,7 +37,7 @@ final class TrainingViewController: UIViewController {
     private var notifyLabel:              UILabel!
     private var englishCustomTextField:   CustomTextField!
     private var addNewWordButton:         UIButton!
-    private var nextWordButton:           UIButton!
+    private var sendButton:               UIButton!
     
     // MARK: - Public Methods
     
@@ -33,13 +50,17 @@ final class TrainingViewController: UIViewController {
         setupTextFieldViewAndNotify()
         setupAddNewWordButton()
         
+        russianWordLabel.text = russianhWords.randomElement()
+        
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        
         view.addGestureRecognizer(tapGestureRecognizer)
-    }
         
+        addNewWordButton.addTarget(self, action: #selector(addNewWordButtonTapped(_:)), for: .touchUpInside)
+        sendButton.addTarget(self, action: #selector(sendButtonTapped(_:)), for: .touchUpInside)
+    }
+    
     // MARK: - Private Methods
-
+    
     private func setupRussianLabelAndView() {
         forRussianWordView = UIView()
         forRussianWordView.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
@@ -108,10 +129,14 @@ final class TrainingViewController: UIViewController {
         englishCustomTextField.clipsToBounds = true
         englishCustomTextField.font = UIFont(name: "AvenirNext-medium", size: 25)
         englishCustomTextField.returnKeyType = .send
+        englishCustomTextField.delegate = self
+        englishCustomTextField.autocapitalizationType = .none
+        englishCustomTextField.autocorrectionType = .no
+        englishCustomTextField.spellCheckingType = .no
         
         englishCustomTextField.topAnchor.constraint(equalTo: notifyLabel.bottomAnchor, constant: 30).isActive = true
         englishCustomTextField.leadingAnchor.constraint(equalTo: forTextFieldOrNotifyView.leadingAnchor, constant: 20).isActive = true
-        englishCustomTextField.trailingAnchor.constraint(equalTo: nextWordButton.leadingAnchor, constant: -10).isActive = true
+        englishCustomTextField.trailingAnchor.constraint(equalTo: sendButton.leadingAnchor, constant: -10).isActive = true
         englishCustomTextField.heightAnchor.constraint(equalTo: forTextFieldOrNotifyView.heightAnchor, multiplier: 0.3).isActive = true
     }
     
@@ -138,25 +163,59 @@ final class TrainingViewController: UIViewController {
     }
     
     private func setupNextWordButton() {
-        nextWordButton = UIButton(type: .custom)
-        nextWordButton.backgroundColor = .systemBlue
-        nextWordButton.translatesAutoresizingMaskIntoConstraints = false
-        nextWordButton.layer.cornerRadius = 15
+        sendButton = UIButton(type: .custom)
+        sendButton.backgroundColor = .systemBlue
+        sendButton.translatesAutoresizingMaskIntoConstraints = false
+        sendButton.layer.cornerRadius = 15
         
         let boldConfig = UIImage.SymbolConfiguration(weight: .bold)
         let image = UIImage(systemName: "arrow.up", withConfiguration: boldConfig)
-        nextWordButton.setImage(image, for: .normal)
-        nextWordButton.tintColor = .white
+        sendButton.setImage(image, for: .normal)
+        sendButton.tintColor = .white
         
-        forTextFieldOrNotifyView.addSubview(nextWordButton)
-        nextWordButton.topAnchor.constraint(equalTo: notifyLabel.bottomAnchor, constant: 50).isActive = true
-        nextWordButton.trailingAnchor.constraint(equalTo: forTextFieldOrNotifyView.trailingAnchor).isActive = true
-        nextWordButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        nextWordButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        forTextFieldOrNotifyView.addSubview(sendButton)
+        sendButton.topAnchor.constraint(equalTo: notifyLabel.bottomAnchor, constant: 50).isActive = true
+        sendButton.trailingAnchor.constraint(equalTo: forTextFieldOrNotifyView.trailingAnchor).isActive = true
+        sendButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        sendButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
     
     @objc private func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+    @objc private func addNewWordButtonTapped(_ sender: UIButton) {
+        print("Hello AddNewWordButtonTapped")
+    }
+    
+    @objc private func sendButtonTapped(_ sender: UIButton) {
+        
+        compareTranslations()
+    }
+    
+    
+    func compareTranslations() {
+        let find = russianhWords.firstIndex { $0 == russianWordLabel.text }
+        let found = englishWords.firstIndex { $0 == englishCustomTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines) }
+        
+        if englishCustomTextField.text != "" {
+            if find == found {
+                russianWordLabel.text = russianhWords.randomElement()
+                englishCustomTextField.text?.removeAll()
+            } else if find != found { }
+        } else if englishCustomTextField.text == "" { }
+    }
+}
+
+// MARK: - TextFieldDelegate
+
+extension TrainingViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField.isFirstResponder {
+            compareTranslations()
+        }
+        
+        return true
     }
 }
 
