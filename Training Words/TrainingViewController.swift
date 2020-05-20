@@ -32,6 +32,10 @@ final class TrainingViewController: UIViewController {
         setupRussianLabelAndView()
         setupTextFieldViewAndNotify()
         setupAddNewWordButton()
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        
+        view.addGestureRecognizer(tapGestureRecognizer)
     }
         
     // MARK: - Private Methods
@@ -149,7 +153,10 @@ final class TrainingViewController: UIViewController {
         nextWordButton.trailingAnchor.constraint(equalTo: forTextFieldOrNotifyView.trailingAnchor).isActive = true
         nextWordButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
         nextWordButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
-
+    }
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
 
