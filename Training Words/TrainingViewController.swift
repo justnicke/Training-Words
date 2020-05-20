@@ -57,6 +57,8 @@ final class TrainingViewController: UIViewController {
         
         addNewWordButton.addTarget(self, action: #selector(addNewWordButtonTapped(_:)), for: .touchUpInside)
         sendButton.addTarget(self, action: #selector(sendButtonTapped(_:)), for: .touchUpInside)
+        englishCustomTextField.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
+
     }
     
     // MARK: - Private Methods
@@ -129,6 +131,7 @@ final class TrainingViewController: UIViewController {
         englishCustomTextField.clipsToBounds = true
         englishCustomTextField.font = UIFont(name: "AvenirNext-medium", size: 25)
         englishCustomTextField.returnKeyType = .send
+        englishCustomTextField.enablesReturnKeyAutomatically = true
         englishCustomTextField.delegate = self
         englishCustomTextField.autocapitalizationType = .none
         englishCustomTextField.autocorrectionType = .no
@@ -164,9 +167,10 @@ final class TrainingViewController: UIViewController {
     
     private func setupNextWordButton() {
         sendButton = UIButton(type: .custom)
-        sendButton.backgroundColor = .systemBlue
+        sendButton.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         sendButton.layer.cornerRadius = 15
+        sendButton.isEnabled = false
         
         let boldConfig = UIImage.SymbolConfiguration(weight: .bold)
         let image = UIImage(systemName: "arrow.up", withConfiguration: boldConfig)
@@ -189,10 +193,18 @@ final class TrainingViewController: UIViewController {
     }
     
     @objc private func sendButtonTapped(_ sender: UIButton) {
-        
         compareTranslations()
     }
     
+    @objc func editingChanged() {
+        if  englishCustomTextField.text?.isEmpty == false {
+            sendButton.isEnabled = true
+            sendButton.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
+        } else {
+            sendButton.isEnabled = false
+            sendButton.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+        }
+    }
     
     func compareTranslations() {
         let find = russianhWords.firstIndex { $0 == russianWordLabel.text }
@@ -206,6 +218,7 @@ final class TrainingViewController: UIViewController {
         } else if englishCustomTextField.text == "" { }
     }
 }
+
 
 // MARK: - TextFieldDelegate
 
