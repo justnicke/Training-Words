@@ -27,7 +27,7 @@ final class TrainingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
         setupRussianLabelAndView()
         setupTextFieldViewAndNotify()
@@ -38,9 +38,12 @@ final class TrainingViewController: UIViewController {
 
     private func setupRussianLabelAndView() {
         forRussianWordView = UIView()
-        forRussianWordView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        forRussianWordView.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
         forRussianWordView.translatesAutoresizingMaskIntoConstraints = false
         forRussianWordView.layer.cornerRadius = 10
+        forRussianWordView.layer.shadowOffset = CGSize(width: 0, height: 5)
+        forRussianWordView.layer.shadowOpacity = 0.3
+        forRussianWordView.layer.shadowRadius = 7
         view.addSubview(forRussianWordView)
         
         forRussianWordView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
@@ -52,17 +55,20 @@ final class TrainingViewController: UIViewController {
         russianWordLabel.textAlignment = .center
         russianWordLabel.text = "русское словосочетание или слово"
         russianWordLabel.translatesAutoresizingMaskIntoConstraints = false
+        russianWordLabel.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        russianWordLabel.font = UIFont(name: "AvenirNext-Bold", size: 25)
+        russianWordLabel.adjustsFontSizeToFitWidth = true
         forRussianWordView.addSubview(russianWordLabel)
         
         russianWordLabel.heightAnchor.constraint(equalTo: forRussianWordView.heightAnchor).isActive = true
-        russianWordLabel.widthAnchor.constraint(equalTo: forRussianWordView.widthAnchor).isActive = true
+        russianWordLabel.widthAnchor.constraint(equalTo: forRussianWordView.widthAnchor, multiplier: 0.9).isActive = true
         russianWordLabel.centerYAnchor.constraint(equalTo: forRussianWordView.centerYAnchor).isActive = true
         russianWordLabel.centerXAnchor.constraint(equalTo: forRussianWordView.centerXAnchor).isActive = true
     }
     
     private func setupTextFieldViewAndNotify() {
         forTextFieldOrNotifyView = UIView()
-        forTextFieldOrNotifyView.backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
+        forTextFieldOrNotifyView.backgroundColor = .clear
         forTextFieldOrNotifyView.translatesAutoresizingMaskIntoConstraints = false
         forTextFieldOrNotifyView.layer.cornerRadius = 10
         view.addSubview(forTextFieldOrNotifyView)
@@ -74,11 +80,13 @@ final class TrainingViewController: UIViewController {
         
         notifyLabel = UILabel()
         notifyLabel.textAlignment = .center
-        notifyLabel.text = "сообщение правильное или не правильное слово"
+        notifyLabel.text = "Correctly"
+        notifyLabel.font = UIFont(name: "AvenirNext-medium", size: 20)
         notifyLabel.translatesAutoresizingMaskIntoConstraints = false
+        notifyLabel.textColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
         forTextFieldOrNotifyView.addSubview(notifyLabel)
         
-        notifyLabel.topAnchor.constraint(equalTo: forTextFieldOrNotifyView.topAnchor, constant: 20).isActive = true
+        notifyLabel.topAnchor.constraint(equalTo: forTextFieldOrNotifyView.topAnchor, constant: 30).isActive = true
         notifyLabel.leadingAnchor.constraint(equalTo: forTextFieldOrNotifyView.leadingAnchor, constant: 20).isActive = true
         notifyLabel.trailingAnchor.constraint(equalTo: forTextFieldOrNotifyView.trailingAnchor, constant: -20).isActive = true
         
@@ -86,7 +94,7 @@ final class TrainingViewController: UIViewController {
         
         englishCustomTextField = CustomTextField()
         englishCustomTextField.translatesAutoresizingMaskIntoConstraints = false
-        englishCustomTextField.placeholder = "translate"
+        englishCustomTextField.placeholder = "enter translate"
         forTextFieldOrNotifyView.addSubview(englishCustomTextField)
         englishCustomTextField.borderStyle = .none
         englishCustomTextField.borderInactiveBottomColor = #colorLiteral(red: 0.5741485357, green: 0.5741624236, blue: 0.574154973, alpha: 1)
@@ -94,7 +102,8 @@ final class TrainingViewController: UIViewController {
         englishCustomTextField.placeholderColor = #colorLiteral(red: 0.5741485357, green: 0.5741624236, blue: 0.574154973, alpha: 1)
         englishCustomTextField.placeholderFontScale = 0.80
         englishCustomTextField.clipsToBounds = true
-        englishCustomTextField.font = UIFont(name: "AvenirNext-medium", size: 20)
+        englishCustomTextField.font = UIFont(name: "AvenirNext-medium", size: 25)
+        englishCustomTextField.returnKeyType = .send
         
         englishCustomTextField.topAnchor.constraint(equalTo: notifyLabel.bottomAnchor, constant: 30).isActive = true
         englishCustomTextField.leadingAnchor.constraint(equalTo: forTextFieldOrNotifyView.leadingAnchor, constant: 20).isActive = true
@@ -104,14 +113,18 @@ final class TrainingViewController: UIViewController {
     
     private func setupAddNewWordButton() {
         addNewWordButton = UIButton(type: .system)
-        addNewWordButton.backgroundColor = .systemBlue
+        addNewWordButton.backgroundColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
         addNewWordButton.translatesAutoresizingMaskIntoConstraints = false
         addNewWordButton.layer.cornerRadius = 25
+        addNewWordButton.layer.shadowColor = UIColor.black.cgColor
+        addNewWordButton.layer.shadowOffset = CGSize(width: 0, height: 10)
+        addNewWordButton.layer.shadowOpacity = 0.2
+        addNewWordButton.layer.shadowRadius = 13
         
         let boldConfig = UIImage.SymbolConfiguration(weight: .bold)
         let image = UIImage(systemName: "plus", withConfiguration: boldConfig)
         addNewWordButton.setImage(image, for: .normal)
-        addNewWordButton.tintColor = .white
+        addNewWordButton.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
         view.addSubview(addNewWordButton)
         addNewWordButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
