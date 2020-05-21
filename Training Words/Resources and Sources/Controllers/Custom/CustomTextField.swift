@@ -17,7 +17,7 @@ final class CustomTextField: UITextField {
      
      This property applies a color to the lower edge of the control. The default value for this property is a clear color.
      */
-     var borderInactiveBottomColor: UIColor? {
+    var borderInactiveBottomColor: UIColor? {
         didSet {
             updateBorder()
         }
@@ -127,7 +127,7 @@ final class CustomTextField: UITextField {
                                                    selector: #selector(textFieldDidEndEditing),
                                                    name: UITextField.textDidEndEditingNotification,
                                                    object: self)
-   
+            
         } else {
             NotificationCenter.default.removeObserver(self)
         }
@@ -201,9 +201,9 @@ final class CustomTextField: UITextField {
         
         layoutPlaceholderInTextRect()
         
-//        if isFirstResponder || !text!.isEmpty {
-//            animateViewsForTextFocused()
-//        }
+        //        if isFirstResponder || !text!.isEmpty {
+        //            animateViewsForTextFocused()
+        //        }
     }
     
     private func layoutPlaceholderInTextRect() {
