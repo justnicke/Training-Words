@@ -20,6 +20,15 @@ final class WordBaseViewController: UIViewController {
                         "keen on", "some people" ,
                         "celebrate"]
     
+    var russianhWords = ["друг друга",
+                         "раздельно",
+                         "разделять",
+                         "обожать (to be)",
+                         "интерес (to be)",
+                         "улвекаться",
+                         "некоторые люди",
+                         "праздновать"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,8 +49,10 @@ final class WordBaseViewController: UIViewController {
         tableView.backgroundColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.separatorStyle = .none
+
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(WordCell.self, forCellReuseIdentifier: WordCell.reuseId)
     }
     
 
@@ -53,9 +64,16 @@ extension WordBaseViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = englishWords[indexPath.row]
-        print(cell.frame.height)
+        let cell = tableView.dequeueReusableCell(withIdentifier: WordCell.reuseId, for: indexPath) as! WordCell
+        let items = englishWords[indexPath.row]
+        let itemRus = russianhWords[indexPath.row]
+        cell.englishLabel.text = items
+        cell.russianLabel.text = itemRus
+        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
     }
 }
