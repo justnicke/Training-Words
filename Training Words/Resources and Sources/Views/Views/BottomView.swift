@@ -51,7 +51,7 @@ final class BottomView: UIView {
         englishCustomTextField.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(englishCustomTextField)
         
-        englishCustomTextField.placeholder = "enter translate"
+        englishCustomTextField.placeholder = "Enter translate"
         englishCustomTextField.font = UIFont(name: "AvenirNext-medium", size: 25)
         englishCustomTextField.clipsToBounds = true
         englishCustomTextField.borderStyle = .none
@@ -64,10 +64,10 @@ final class BottomView: UIView {
         englishCustomTextField.borderActiveBottomColor = #colorLiteral(red: 0.463878572, green: 0.4404314756, blue: 0.9081067443, alpha: 0.9995117188)
         englishCustomTextField.placeholderColor = #colorLiteral(red: 0.5741485357, green: 0.5741624236, blue: 0.574154973, alpha: 1)
         englishCustomTextField.placeholderFontScale = 0.80
-        englishCustomTextField.topAnchor.constraint(equalTo: notificationLabel.bottomAnchor, constant: 30).isActive = true
+        englishCustomTextField.topAnchor.constraint(equalTo: notificationLabel.bottomAnchor, constant: 10).isActive = true
         englishCustomTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
         englishCustomTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20).isActive = true
-        englishCustomTextField.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.3).isActive = true
+        englishCustomTextField.heightAnchor.constraint(equalToConstant: 60).isActive = true
     }
 }
 

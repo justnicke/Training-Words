@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = TrainingViewController()
+        window?.rootViewController = WordBaseViewController()
         window?.makeKeyAndVisible()
     }
 
