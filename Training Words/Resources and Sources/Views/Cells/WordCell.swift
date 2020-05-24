@@ -20,6 +20,7 @@ final class WordCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     
         self.layer.cornerRadius = 10
+        self.selectionStyle = .none             
         
         setup()
     }

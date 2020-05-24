@@ -98,7 +98,9 @@ final class TrainingViewController: UIViewController {
     }
     
     @objc private func addNewWordButtonAction(_ sender: UIButton) {
-        print("\(#function)")
+        let navigationController = UINavigationController(rootViewController: WordBaseViewController())
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true, completion: nil)
     }
     
     private func compareTranslations() {

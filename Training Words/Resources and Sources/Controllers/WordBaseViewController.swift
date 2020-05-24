@@ -35,6 +35,7 @@ final class WordBaseViewController: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.866422236, green: 0.9141893983, blue: 0.9915274978, alpha: 1)
         
         setupTableView()
+        setupNavigationController()
     }
 
     
@@ -55,6 +56,10 @@ final class WordBaseViewController: UIViewController {
         tableView.register(WordCell.self, forCellReuseIdentifier: WordCell.reuseId)
     }
     
+    private func setupNavigationController() {
+        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
+        navigationController?.navigationBar.shadowImage = UIImage()
+    }
 
 }
 
