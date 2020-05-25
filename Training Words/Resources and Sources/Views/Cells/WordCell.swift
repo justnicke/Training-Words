@@ -19,8 +19,11 @@ final class WordCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     
+        self.selectionStyle = .none
         self.layer.cornerRadius = 10
-        self.selectionStyle = .none             
+        self.layer.shadowOffset = CGSize(width: 0, height: 3)
+        self.layer.shadowOpacity = 0.15
+        self.layer.shadowRadius = 7
         
         setup()
     }

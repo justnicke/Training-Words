@@ -29,6 +29,10 @@ final class WordBaseViewController: UIViewController {
                          "некоторые люди",
                          "праздновать"]
     
+    private var weightConfig: UIImage.SymbolConfiguration!
+    private var backBarButtonItem: UIBarButtonItem!
+    private var addWordBarButtonItem: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,6 +40,7 @@ final class WordBaseViewController: UIViewController {
         
         setupTableView()
         setupNavigationController()
+        
     }
 
     
@@ -47,7 +52,7 @@ final class WordBaseViewController: UIViewController {
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        tableView.backgroundColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
+        tableView.backgroundColor = #colorLiteral(red: 0.866422236, green: 0.9141893983, blue: 0.9915274978, alpha: 1)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = .none
@@ -57,8 +62,43 @@ final class WordBaseViewController: UIViewController {
     }
     
     private func setupNavigationController() {
-        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
+        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.866422236, green: 0.9141893983, blue: 0.9915274978, alpha: 1)
         navigationController?.navigationBar.shadowImage = UIImage()
+        
+        navigationItem.title = "Word Base"
+        
+        weightConfig = UIImage.SymbolConfiguration(weight: .bold)
+        let backImage = UIImage(systemName: "chevron.left", withConfiguration: weightConfig)
+        backBarButtonItem = UIBarButtonItem(image: backImage,
+                                                      style: .plain,
+                                                      target: self,
+                                                      action: #selector(backBarButtomAction(_:)))
+        navigationItem.leftBarButtonItem = backBarButtonItem
+        
+        
+        weightConfig = UIImage.SymbolConfiguration(weight: .bold)
+        let addImage = UIImage(systemName: "plus", withConfiguration: weightConfig)
+        addWordBarButtonItem = UIBarButtonItem(image: addImage,
+                                                 style: .plain,
+                                                 target: self,
+                                                 action: #selector(addWordkBarButtomAction(_:)))
+        navigationItem.rightBarButtonItem = addWordBarButtonItem
+        
+        [addWordBarButtonItem, backBarButtonItem].forEach {
+            $0?.tintColor = .black
+        }
+    
+    }
+    
+    @objc private func backBarButtomAction(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc private func addWordkBarButtomAction(_ sender: UIBarButtonItem) {
+        
+
+        
+        
     }
 
 }
