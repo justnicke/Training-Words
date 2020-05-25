@@ -11,7 +11,7 @@ import UIKit
 final class BottomView: UIView {
     
     // MARK: - Public Properties
-
+    
     var notificationLabel: UILabel!
     var englishCustomTextField: CustomTextField!
     
@@ -33,7 +33,7 @@ final class BottomView: UIView {
     
     // MARK: - Private Methods
     
-    func setupLabelAndTextField() {
+    private func setupLabelAndTextField() {
         notificationLabel = UILabel()
         notificationLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(notificationLabel)

@@ -13,7 +13,7 @@ final class TopView: UIView {
     // MARK: - Public Properties
     
     var wordTranslateLabel: UILabel!
-
+    
     // MARK: - Constructors
     
     override init(frame: CGRect) {
@@ -35,7 +35,7 @@ final class TopView: UIView {
     
     // MARK: - Private Methods
     
-    func setupWordTranslateLabel() {
+    private func setupWordTranslateLabel() {
         wordTranslateLabel = UILabel()
         wordTranslateLabel.textAlignment = .center
         wordTranslateLabel.text = "словосочетание или слово"

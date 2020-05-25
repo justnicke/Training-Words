@@ -34,10 +34,6 @@ final class TrainingViewController: UIViewController {
     private var bottomView: BottomView!
     private var addNewWordButton: UIButton!
     
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    var testView: NewWordView!
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
     // MARK: - Public Methods
     
     override func viewDidLoad() {
@@ -53,16 +49,6 @@ final class TrainingViewController: UIViewController {
         view.addGestureRecognizer(tapGestureRecognizer)
         
         addNewWordButton.addTarget(self, action: #selector(addNewWordButtonAction(_:)), for: .touchUpInside)
-
-        
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        testView = NewWordView(frame: CGRect(x: view.frame.width / 12,
-                                             y: view.frame.width / 2,
-                                             width: view.frame.width / 1.2,
-                                             height: view.frame.height / 2.5))
-        view.addSubview(testView)
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
     }
     
     // MARK: - Private Methods
@@ -115,6 +101,7 @@ final class TrainingViewController: UIViewController {
         let navigationController = UINavigationController(rootViewController: WordBaseViewController())
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true, completion: nil)
+        bottomView.englishCustomTextField.text?.removeAll()
     }
     
     private func compareTranslations() {
@@ -163,7 +150,6 @@ final class TrainingViewController: UIViewController {
         }
     }
 }
-
 
 // MARK: - TextFieldDelegate
 
