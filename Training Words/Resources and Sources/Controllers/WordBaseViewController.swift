@@ -109,12 +109,18 @@ final class WordBaseViewController: UIViewController {
         tableView.insertRows(at: [indexPath], with: .automatic)
     }
     
-    private func deleteWord(indexPath: IndexPath) {
-        englishWords.remove(at: indexPath.row)
-        russianhWords.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .automatic)
+    private func deleteWordToCoreData(indexPath: IndexPath) {
+        let context = PersistenceService.context
+        context.delete(createdWords[indexPath.row])
+        createdWords.remove(at: indexPath.row)
+        
+        do {
+            try PersistenceService.context.save()
+            tableView.reloadData()
+            print(createdWords)
+        } catch {}
     }
-    
+
     private func fetchRequest() {
         let fetchRequest: NSFetchRequest<NewWord> = NewWord.fetchRequest()
         
@@ -160,7 +166,9 @@ extension WordBaseViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        deleteWord(indexPath: indexPath)
+        if editingStyle == .delete {
+            deleteWordToCoreData(indexPath: indexPath)
+        }
     }
 }
 
