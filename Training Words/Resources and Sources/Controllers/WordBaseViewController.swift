@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 final class WordBaseViewController: UIViewController {
     
@@ -14,6 +15,7 @@ final class WordBaseViewController: UIViewController {
     
     var englishWords = ["each other"]
     var russianhWords = ["друг друга"]
+    var createdWords: [NewWord] = []
     
     // MARK: - Private Properties
     
@@ -33,6 +35,7 @@ final class WordBaseViewController: UIViewController {
         setupTableView()
         setupNavigationController()
         setupAlertView()
+        fetchRequest()
     }
     
     // MARK: - Private Methods
@@ -95,10 +98,13 @@ final class WordBaseViewController: UIViewController {
         alertView.addGestureRecognizer(tapGestureRecognizer)
     }
     
-    private func addNewWord(english: String, russian: String) {
+    private func saveToCoreData(english: String, russian: String) {
         let index = 0
-        englishWords.insert(english, at: index)
-        russianhWords.insert(russian, at: index)
+        let newWord = NewWord(context: PersistenceService.context)
+        newWord.englishWord = english
+        newWord.russianWord = russian
+        PersistenceService.saveContext()
+        createdWords.insert(newWord, at: index)
         let indexPath = IndexPath(row: index, section: 0)
         tableView.insertRows(at: [indexPath], with: .automatic)
     }
@@ -107,6 +113,16 @@ final class WordBaseViewController: UIViewController {
         englishWords.remove(at: indexPath.row)
         russianhWords.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+    
+    private func fetchRequest() {
+        let fetchRequest: NSFetchRequest<NewWord> = NewWord.fetchRequest()
+        
+        do {
+            let createdWord = try PersistenceService.context.fetch(fetchRequest)
+            self.createdWords = createdWord.reversed()
+            tableView.reloadData()
+        } catch {}
     }
     
     @objc private func backBarButtomAction(_ sender: UIBarButtonItem) {
@@ -126,15 +142,15 @@ final class WordBaseViewController: UIViewController {
 
 extension WordBaseViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return englishWords.count
+        return createdWords.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: WordCell.reuseId, for: indexPath) as! WordCell
-        let items = englishWords[indexPath.row]
-        let itemRus = russianhWords[indexPath.row]
-        cell.englishLabel.text = items
-        cell.russianLabel.text = itemRus
+//        let items = englishWords[indexPath.row]
+//        let itemRus = russianhWords[indexPath.row]
+        cell.englishLabel.text = createdWords[indexPath.row].englishWord
+        cell.russianLabel.text = createdWords[indexPath.row].russianWord
         
         return cell
     }
@@ -162,7 +178,7 @@ extension WordBaseViewController: ButtonDelegate {
         guard let english = alertView.engishWordTextField.text else { return }
         guard let russian = alertView.russianWordTextField.text else { return }
         
-        addNewWord(english: english, russian: russian)
+        saveToCoreData(english: english, russian: russian)
         
         alertView.isHidden = true
         dismissKeyboard()

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-// уауауа
+
 final class TrainingViewController: UIViewController {
     
     // MARK: - Public Properties

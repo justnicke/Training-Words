@@ -18,6 +18,10 @@
 		5E1A3415247CFE8E00BFE652 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1A3409247CFE8E00BFE652 /* AlertView.swift */; };
 		5E1A3416247CFE8E00BFE652 /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1A340A247CFE8E00BFE652 /* BottomView.swift */; };
 		5E1A3417247CFE8E00BFE652 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1A340B247CFE8E00BFE652 /* TopView.swift */; };
+		5E1A341C247D0D4300BFE652 /* DataWordModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5E1A341A247D0D4300BFE652 /* DataWordModel.xcdatamodeld */; };
+		5E1A341E247D323B00BFE652 /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1A341D247D323B00BFE652 /* PersistenceService.swift */; };
+		5E1A3421247D36DA00BFE652 /* NewWord+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1A341F247D36DA00BFE652 /* NewWord+CoreDataClass.swift */; };
+		5E1A3422247D36DA00BFE652 /* NewWord+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1A3420247D36DA00BFE652 /* NewWord+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +37,10 @@
 		5E1A3409247CFE8E00BFE652 /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		5E1A340A247CFE8E00BFE652 /* BottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
 		5E1A340B247CFE8E00BFE652 /* TopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
+		5E1A341B247D0D4300BFE652 /* DataWordModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataWordModel.xcdatamodel; sourceTree = "<group>"; };
+		5E1A341D247D323B00BFE652 /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
+		5E1A341F247D36DA00BFE652 /* NewWord+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewWord+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5E1A3420247D36DA00BFE652 /* NewWord+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewWord+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5EB4667C2474231D006812F9 /* Training Words.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Training Words.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -50,9 +58,12 @@
 		5E1A33F8247CFE8E00BFE652 /* Resources and Sources */ = {
 			isa = PBXGroup;
 			children = (
+				5E1A3423247D442F00BFE652 /* Services */,
+				5E1A3424247D446700BFE652 /* Model */,
 				5E1A3405247CFE8E00BFE652 /* Views */,
 				5E1A3400247CFE8E00BFE652 /* Controllers */,
 				5E1A33F9247CFE8E00BFE652 /* Supporting Files */,
+				5E1A3425247D447E00BFE652 /* CoreData */,
 			);
 			path = "Resources and Sources";
 			sourceTree = "<group>";
@@ -112,6 +123,31 @@
 				5E1A340B247CFE8E00BFE652 /* TopView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		5E1A3423247D442F00BFE652 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5E1A341D247D323B00BFE652 /* PersistenceService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		5E1A3424247D446700BFE652 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5E1A3420247D36DA00BFE652 /* NewWord+CoreDataProperties.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5E1A3425247D447E00BFE652 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				5E1A341A247D0D4300BFE652 /* DataWordModel.xcdatamodeld */,
+				5E1A341F247D36DA00BFE652 /* NewWord+CoreDataClass.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		5EB466732474231D006812F9 = {
@@ -208,11 +244,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E1A3421247D36DA00BFE652 /* NewWord+CoreDataClass.swift in Sources */,
 				5E1A3417247CFE8E00BFE652 /* TopView.swift in Sources */,
+				5E1A341C247D0D4300BFE652 /* DataWordModel.xcdatamodeld in Sources */,
 				5E1A3416247CFE8E00BFE652 /* BottomView.swift in Sources */,
 				5E1A3415247CFE8E00BFE652 /* AlertView.swift in Sources */,
 				5E1A3411247CFE8E00BFE652 /* TrainingViewController.swift in Sources */,
 				5E1A340E247CFE8E00BFE652 /* AppDelegate.swift in Sources */,
+				5E1A341E247D323B00BFE652 /* PersistenceService.swift in Sources */,
+				5E1A3422247D36DA00BFE652 /* NewWord+CoreDataProperties.swift in Sources */,
 				5E1A3412247CFE8E00BFE652 /* WordBaseViewController.swift in Sources */,
 				5E1A3414247CFE8E00BFE652 /* WordCell.swift in Sources */,
 				5E1A3410247CFE8E00BFE652 /* SceneDelegate.swift in Sources */,
@@ -406,6 +446,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		5E1A341A247D0D4300BFE652 /* DataWordModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5E1A341B247D0D4300BFE652 /* DataWordModel.xcdatamodel */,
+			);
+			currentVersion = 5E1A341B247D0D4300BFE652 /* DataWordModel.xcdatamodel */;
+			path = DataWordModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 5EB466742474231D006812F9 /* Project object */;
 }
