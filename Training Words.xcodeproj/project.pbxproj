@@ -7,23 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5EB466802474231D006812F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB4667F2474231D006812F9 /* AppDelegate.swift */; };
-		5EB466822474231D006812F9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB466812474231D006812F9 /* SceneDelegate.swift */; };
-		5EB466842474231D006812F9 /* TrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB466832474231D006812F9 /* TrainingViewController.swift */; };
-		5EB466892474231E006812F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB466882474231E006812F9 /* Assets.xcassets */; };
-		5EB4668C2474231E006812F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EB4668A2474231E006812F9 /* LaunchScreen.storyboard */; };
-		5EB4669524742708006812F9 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB4669424742708006812F9 /* CustomTextField.swift */; };
+		5E1A340C247CFE8E00BFE652 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E1A33FA247CFE8E00BFE652 /* Assets.xcassets */; };
+		5E1A340D247CFE8E00BFE652 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E1A33FB247CFE8E00BFE652 /* LaunchScreen.storyboard */; };
+		5E1A340E247CFE8E00BFE652 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1A33FD247CFE8E00BFE652 /* AppDelegate.swift */; };
+		5E1A3410247CFE8E00BFE652 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1A33FF247CFE8E00BFE652 /* SceneDelegate.swift */; };
+		5E1A3411247CFE8E00BFE652 /* TrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1A3401247CFE8E00BFE652 /* TrainingViewController.swift */; };
+		5E1A3412247CFE8E00BFE652 /* WordBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1A3402247CFE8E00BFE652 /* WordBaseViewController.swift */; };
+		5E1A3413247CFE8E00BFE652 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1A3404247CFE8E00BFE652 /* CustomTextField.swift */; };
+		5E1A3414247CFE8E00BFE652 /* WordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1A3407247CFE8E00BFE652 /* WordCell.swift */; };
+		5E1A3415247CFE8E00BFE652 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1A3409247CFE8E00BFE652 /* AlertView.swift */; };
+		5E1A3416247CFE8E00BFE652 /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1A340A247CFE8E00BFE652 /* BottomView.swift */; };
+		5E1A3417247CFE8E00BFE652 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1A340B247CFE8E00BFE652 /* TopView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5E1A33FA247CFE8E00BFE652 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5E1A33FC247CFE8E00BFE652 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5E1A33FD247CFE8E00BFE652 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5E1A33FE247CFE8E00BFE652 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5E1A33FF247CFE8E00BFE652 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		5E1A3401247CFE8E00BFE652 /* TrainingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingViewController.swift; sourceTree = "<group>"; };
+		5E1A3402247CFE8E00BFE652 /* WordBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordBaseViewController.swift; sourceTree = "<group>"; };
+		5E1A3404247CFE8E00BFE652 /* CustomTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		5E1A3407247CFE8E00BFE652 /* WordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordCell.swift; sourceTree = "<group>"; };
+		5E1A3409247CFE8E00BFE652 /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		5E1A340A247CFE8E00BFE652 /* BottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
+		5E1A340B247CFE8E00BFE652 /* TopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
 		5EB4667C2474231D006812F9 /* Training Words.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Training Words.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5EB4667F2474231D006812F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5EB466812474231D006812F9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		5EB466832474231D006812F9 /* TrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingViewController.swift; sourceTree = "<group>"; };
-		5EB466882474231E006812F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		5EB4668B2474231E006812F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		5EB4668D2474231E006812F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5EB4669424742708006812F9 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +47,73 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5E1A33F8247CFE8E00BFE652 /* Resources and Sources */ = {
+			isa = PBXGroup;
+			children = (
+				5E1A3405247CFE8E00BFE652 /* Views */,
+				5E1A3400247CFE8E00BFE652 /* Controllers */,
+				5E1A33F9247CFE8E00BFE652 /* Supporting Files */,
+			);
+			path = "Resources and Sources";
+			sourceTree = "<group>";
+		};
+		5E1A33F9247CFE8E00BFE652 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5E1A33FA247CFE8E00BFE652 /* Assets.xcassets */,
+				5E1A33FB247CFE8E00BFE652 /* LaunchScreen.storyboard */,
+				5E1A33FD247CFE8E00BFE652 /* AppDelegate.swift */,
+				5E1A33FE247CFE8E00BFE652 /* Info.plist */,
+				5E1A33FF247CFE8E00BFE652 /* SceneDelegate.swift */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5E1A3400247CFE8E00BFE652 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5E1A3401247CFE8E00BFE652 /* TrainingViewController.swift */,
+				5E1A3402247CFE8E00BFE652 /* WordBaseViewController.swift */,
+				5E1A3403247CFE8E00BFE652 /* Custom */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		5E1A3403247CFE8E00BFE652 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				5E1A3404247CFE8E00BFE652 /* CustomTextField.swift */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
+		5E1A3405247CFE8E00BFE652 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5E1A3406247CFE8E00BFE652 /* Cells */,
+				5E1A3408247CFE8E00BFE652 /* Views */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5E1A3406247CFE8E00BFE652 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				5E1A3407247CFE8E00BFE652 /* WordCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		5E1A3408247CFE8E00BFE652 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5E1A3409247CFE8E00BFE652 /* AlertView.swift */,
+				5E1A340A247CFE8E00BFE652 /* BottomView.swift */,
+				5E1A340B247CFE8E00BFE652 /* TopView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		5EB466732474231D006812F9 = {
 			isa = PBXGroup;
 			children = (
@@ -56,23 +133,9 @@
 		5EB4667E2474231D006812F9 /* Training Words */ = {
 			isa = PBXGroup;
 			children = (
-				5EB466832474231D006812F9 /* TrainingViewController.swift */,
-				5EB4669424742708006812F9 /* CustomTextField.swift */,
-				5EB4669324742353006812F9 /* Supporting Files */,
+				5E1A33F8247CFE8E00BFE652 /* Resources and Sources */,
 			);
 			path = "Training Words";
-			sourceTree = "<group>";
-		};
-		5EB4669324742353006812F9 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				5EB4667F2474231D006812F9 /* AppDelegate.swift */,
-				5EB466812474231D006812F9 /* SceneDelegate.swift */,
-				5EB466882474231E006812F9 /* Assets.xcassets */,
-				5EB4668A2474231E006812F9 /* LaunchScreen.storyboard */,
-				5EB4668D2474231E006812F9 /* Info.plist */,
-			);
-			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,8 +196,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5EB4668C2474231E006812F9 /* LaunchScreen.storyboard in Resources */,
-				5EB466892474231E006812F9 /* Assets.xcassets in Resources */,
+				5E1A340D247CFE8E00BFE652 /* LaunchScreen.storyboard in Resources */,
+				5E1A340C247CFE8E00BFE652 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,20 +208,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5EB4669524742708006812F9 /* CustomTextField.swift in Sources */,
-				5EB466842474231D006812F9 /* TrainingViewController.swift in Sources */,
-				5EB466802474231D006812F9 /* AppDelegate.swift in Sources */,
-				5EB466822474231D006812F9 /* SceneDelegate.swift in Sources */,
+				5E1A3417247CFE8E00BFE652 /* TopView.swift in Sources */,
+				5E1A3416247CFE8E00BFE652 /* BottomView.swift in Sources */,
+				5E1A3415247CFE8E00BFE652 /* AlertView.swift in Sources */,
+				5E1A3411247CFE8E00BFE652 /* TrainingViewController.swift in Sources */,
+				5E1A340E247CFE8E00BFE652 /* AppDelegate.swift in Sources */,
+				5E1A3412247CFE8E00BFE652 /* WordBaseViewController.swift in Sources */,
+				5E1A3414247CFE8E00BFE652 /* WordCell.swift in Sources */,
+				5E1A3410247CFE8E00BFE652 /* SceneDelegate.swift in Sources */,
+				5E1A3413247CFE8E00BFE652 /* CustomTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		5EB4668A2474231E006812F9 /* LaunchScreen.storyboard */ = {
+		5E1A33FB247CFE8E00BFE652 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				5EB4668B2474231E006812F9 /* Base */,
+				5E1A33FC247CFE8E00BFE652 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -286,7 +354,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q4947V4853;
-				INFOPLIST_FILE = "$(SRCROOT)/Training Words/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Training Words/Resources and Sources/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -304,7 +372,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q4947V4853;
-				INFOPLIST_FILE = "$(SRCROOT)/Training Words/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Training Words/Resources and Sources/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
