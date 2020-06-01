@@ -13,8 +13,6 @@ final class WordBaseViewController: UIViewController {
     
     // MARK: - Public Properties
     
-    var englishWords = ["each other"]
-    var russianhWords = ["друг друга"]
     var createdWords: [NewWord] = []
     
     // MARK: - Private Properties
@@ -48,7 +46,7 @@ final class WordBaseViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = .singleLine
-        tableView.separatorColor = #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)
+        tableView.separatorColor = #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1)
         
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -132,6 +130,9 @@ final class WordBaseViewController: UIViewController {
     }
     
     @objc private func backBarButtomAction(_ sender: UIBarButtonItem) {
+//        if let presenter = presentingViewController as? TrainingViewController {
+//
+//        }
         dismiss(animated: true, completion: nil)
     }
     
@@ -153,8 +154,6 @@ extension WordBaseViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: WordCell.reuseId, for: indexPath) as! WordCell
-//        let items = englishWords[indexPath.row]
-//        let itemRus = russianhWords[indexPath.row]
         cell.englishLabel.text = createdWords[indexPath.row].englishWord
         cell.russianLabel.text = createdWords[indexPath.row].russianWord
         
@@ -163,6 +162,10 @@ extension WordBaseViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
+    }
+    
+    private func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath!) -> Bool {
+        return true
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -180,6 +183,8 @@ extension WordBaseViewController: ButtonDelegate {
         dismissKeyboard()
         alertView.engishWordTextField.text?.removeAll()
         alertView.russianWordTextField.text?.removeAll()
+        
+        print(createdWords)
     }
     
     func okButtonTapped(sender: UIButton) {

@@ -7,30 +7,18 @@
 //
 
 import UIKit
+import CoreData
 
 final class TrainingViewController: UIViewController {
     
     // MARK: - Public Properties
-    
-    var englishWords = ["each other",
-                        "separately",
-                        "separate",
-                        "fond of",
-                        "interested in",
-                        "keen on", "some people" ,
-                        "celebrate"]
-    var russianhWords = ["друг друга",
-                         "раздельно",
-                         "разделять",
-                         "обожать (to be)",
-                         "интерес (to be)",
-                         "улвекаться",
-                         "некоторые люди",
-                         "праздновать"]
+
+    var englishWords = [String]()
+    var russianhWords = [String]()
     
     // MARK: - Private Properties
     
-    private var topView: TopView!
+    var topView: TopView!
     private var bottomView: BottomView!
     private var addNewWordButton: UIButton!
     
@@ -39,9 +27,10 @@ final class TrainingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        
+    
         setupTopAndBottomView()
         setupAddNewWordButton()
+        fetchRequest()
         
         topView.wordTranslateLabel.text = russianhWords.randomElement()
         
@@ -49,9 +38,20 @@ final class TrainingViewController: UIViewController {
         view.addGestureRecognizer(tapGestureRecognizer)
         
         addNewWordButton.addTarget(self, action: #selector(addNewWordButtonAction(_:)), for: .touchUpInside)
+
     }
     
     // MARK: - Private Methods
+    
+    func fetchRequest() {
+        let fetchRequest: NSFetchRequest<NewWord> = NewWord.fetchRequest()
+
+        do {
+            let createdWord = try PersistenceService.context.fetch(fetchRequest)
+            englishWords = createdWord.compactMap { $0.englishWord }
+            russianhWords = createdWord.compactMap { $0.russianWord }
+        } catch {}
+    }
     
     private func setupTopAndBottomView() {
         topView = TopView()
@@ -161,4 +161,6 @@ extension TrainingViewController: UITextFieldDelegate {
         return true
     }
 }
+
+
 
