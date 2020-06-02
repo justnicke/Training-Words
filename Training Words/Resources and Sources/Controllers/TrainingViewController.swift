@@ -110,7 +110,6 @@ final class TrainingViewController: UIViewController {
         if indexRussianСollection == indexEnglishСollection {
             let distribution = GKShuffledDistribution(lowestValue: russianhWords.startIndex, highestValue: russianhWords.endIndex - 1)
             topView.wordTranslateLabel.text = russianhWords[distribution.nextInt()]
-            print(russianhWords)
             
             bottomView.englishCustomTextField.text?.removeAll()
             notifyResult(translate: true)
