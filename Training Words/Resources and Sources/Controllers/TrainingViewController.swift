@@ -43,7 +43,7 @@ final class TrainingViewController: UIViewController {
     
     // MARK: - Private Methods
     
-    func fetchRequest() {
+    private func fetchRequest() {
         let fetchRequest: NSFetchRequest<NewWord> = NewWord.fetchRequest()
 
         do {

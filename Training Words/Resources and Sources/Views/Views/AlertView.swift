@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ButtonDelegate: class {
+protocol TappedButtonAlertDelegate: class {
     func cancelButtonTapped(sender: UIButton)
     func okButtonTapped(sender: UIButton)
 }
@@ -19,7 +19,7 @@ final class AlertView: UIView {
     
     let engishWordTextField = CustomTextField()
     let russianWordTextField = CustomTextField()
-    weak var delegate: ButtonDelegate?
+    weak var delegate: TappedButtonAlertDelegate?
     
     // MARK: - Private Properties
     

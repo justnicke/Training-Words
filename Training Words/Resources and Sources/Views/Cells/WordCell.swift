@@ -47,7 +47,7 @@ final class WordCell: UITableViewCell {
         englishLabel.adjustsFontSizeToFitWidth = true
         englishLabel.textAlignment = .center
         
-        separateView.backgroundColor = #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)
+        separateView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         
         [russianLabel, englishLabel, separateView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false

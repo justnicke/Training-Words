@@ -177,7 +177,7 @@ extension WordBaseViewController: UITableViewDataSource, UITableViewDelegate {
 
 // MARK: - Extension ButtonDelegate
 
-extension WordBaseViewController: ButtonDelegate {
+extension WordBaseViewController: TappedButtonAlertDelegate {
     func cancelButtonTapped(sender: UIButton) {
         alertView.isHidden = true
         dismissKeyboard()

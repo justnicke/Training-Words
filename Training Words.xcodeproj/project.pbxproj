@@ -63,7 +63,6 @@
 				5E1A3405247CFE8E00BFE652 /* Views */,
 				5E1A3400247CFE8E00BFE652 /* Controllers */,
 				5E1A33F9247CFE8E00BFE652 /* Supporting Files */,
-				5E1A3425247D447E00BFE652 /* CoreData */,
 			);
 			path = "Resources and Sources";
 			sourceTree = "<group>";
@@ -128,7 +127,7 @@
 		5E1A3423247D442F00BFE652 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				5E1A341D247D323B00BFE652 /* PersistenceService.swift */,
+				5E1A3425247D447E00BFE652 /* CoreData */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -146,6 +145,7 @@
 			children = (
 				5E1A341A247D0D4300BFE652 /* DataWordModel.xcdatamodeld */,
 				5E1A341F247D36DA00BFE652 /* NewWord+CoreDataClass.swift */,
+				5E1A341D247D323B00BFE652 /* PersistenceService.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
