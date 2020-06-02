@@ -10,11 +10,6 @@ import UIKit
 
 final class WordBaseViewController: UIViewController {
     
-    // MARK: - Public Properties
-    
-    var englishWords = ["each other"]
-    var russianhWords = ["друг друга"]
-    
     // MARK: - Private Properties
     
     private var tableView: UITableView!
@@ -22,13 +17,15 @@ final class WordBaseViewController: UIViewController {
     private var backBarButtonItem: UIBarButtonItem!
     private var addWordBarButtonItem: UIBarButtonItem!
     private var alertView: AlertView!
+    private var englishWords: [String] = []
+    private var russianWords: [String] = []
     
     // MARK: - Public Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = #colorLiteral(red: 0.866422236, green: 0.9141893983, blue: 0.9915274978, alpha: 1)
+        overrideUserInterfaceStyle = .light
+        view.backgroundColor = .clear
         
         setupTableView()
         setupNavigationController()
@@ -41,11 +38,11 @@ final class WordBaseViewController: UIViewController {
         tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
-        tableView.backgroundColor = #colorLiteral(red: 0.866422236, green: 0.9141893983, blue: 0.9915274978, alpha: 1)
+        tableView.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = .singleLine
-        tableView.separatorColor = #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)
+        tableView.tableFooterView = UIView()
         
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -56,8 +53,11 @@ final class WordBaseViewController: UIViewController {
     }
     
     private func setupNavigationController() {
-        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.866422236, green: 0.9141893983, blue: 0.9915274978, alpha: 1)
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
         navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "AvenirNext-DemiBold", size: 17)!]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         navigationItem.title = "Word Base"
         
@@ -78,13 +78,13 @@ final class WordBaseViewController: UIViewController {
         navigationItem.rightBarButtonItem = addWordBarButtonItem
         
         [addWordBarButtonItem, backBarButtonItem].forEach {
-            $0?.tintColor = .black
+            $0?.tintColor = .white
         }
     }
     
     private func setupAlertView() {
         alertView = AlertView(frame: CGRect(x: view.frame.width / 21.99,
-                                            y: view.frame.width / 2,
+                                            y: view.frame.width / 3,
                                             width: view.frame.width / 1.1,
                                             height: view.frame.height / 2.5))
         view.addSubview(alertView)
@@ -95,21 +95,29 @@ final class WordBaseViewController: UIViewController {
         alertView.addGestureRecognizer(tapGestureRecognizer)
     }
     
-    private func addNewWord(english: String, russian: String) {
+    private func save() {
+        guard let english = alertView.engishWordTextField.text else { return }
+        guard let russian = alertView.russianWordTextField.text else { return }
+        
         let index = 0
         englishWords.insert(english, at: index)
-        russianhWords.insert(russian, at: index)
+        russianWords.insert(russian, at: index)
         let indexPath = IndexPath(row: index, section: 0)
         tableView.insertRows(at: [indexPath], with: .automatic)
     }
     
-    private func deleteWord(indexPath: IndexPath) {
+    private func deleteWordViaCoreData(indexPath: IndexPath) {
         englishWords.remove(at: indexPath.row)
-        russianhWords.remove(at: indexPath.row)
+        russianWords.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
     @objc private func backBarButtomAction(_ sender: UIBarButtonItem) {
+        if let presenter = presentingViewController as? TrainingViewController {
+            presenter.englishWords = englishWords
+            presenter.russianWords = russianWords
+            presenter.topView.wordTranslateLabel.text = presenter.russianWords.randomElement()
+        }
         dismiss(animated: true, completion: nil)
     }
     
@@ -131,10 +139,8 @@ extension WordBaseViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: WordCell.reuseId, for: indexPath) as! WordCell
-        let items = englishWords[indexPath.row]
-        let itemRus = russianhWords[indexPath.row]
-        cell.englishLabel.text = items
-        cell.russianLabel.text = itemRus
+        cell.englishLabel.text = englishWords[indexPath.row]
+        cell.russianLabel.text = russianWords[indexPath.row]
         
         return cell
     }
@@ -144,13 +150,15 @@ extension WordBaseViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        deleteWord(indexPath: indexPath)
+        if editingStyle == .delete {
+            deleteWordViaCoreData(indexPath: indexPath)
+        }
     }
 }
 
-// MARK: - Extension ButtonDelegate
+// MARK: - Extension TappedButtonAlertDelegate
 
-extension WordBaseViewController: ButtonDelegate {
+extension WordBaseViewController: TappedButtonAlertDelegate {
     func cancelButtonTapped(sender: UIButton) {
         alertView.isHidden = true
         dismissKeyboard()
@@ -159,10 +167,7 @@ extension WordBaseViewController: ButtonDelegate {
     }
     
     func okButtonTapped(sender: UIButton) {
-        guard let english = alertView.engishWordTextField.text else { return }
-        guard let russian = alertView.russianWordTextField.text else { return }
-        
-        addNewWord(english: english, russian: russian)
+        save()
         
         alertView.isHidden = true
         dismissKeyboard()

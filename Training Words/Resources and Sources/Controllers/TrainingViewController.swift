@@ -7,30 +7,18 @@
 //
 
 import UIKit
+import GameplayKit
 
 final class TrainingViewController: UIViewController {
     
     // MARK: - Public Properties
     
-    var englishWords = ["each other",
-                        "separately",
-                        "separate",
-                        "fond of",
-                        "interested in",
-                        "keen on", "some people" ,
-                        "celebrate"]
-    var russianhWords = ["друг друга",
-                         "раздельно",
-                         "разделять",
-                         "обожать (to be)",
-                         "интерес (to be)",
-                         "улвекаться",
-                         "некоторые люди",
-                         "праздновать"]
+    var topView: TopView!
+    var englishWords = [String]()
+    var russianWords = [String]()
     
     // MARK: - Private Properties
     
-    private var topView: TopView!
     private var bottomView: BottomView!
     private var addNewWordButton: UIButton!
     
@@ -38,17 +26,23 @@ final class TrainingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        overrideUserInterfaceStyle = .light
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
         setupTopAndBottomView()
         setupAddNewWordButton()
         
-        topView.wordTranslateLabel.text = russianhWords.randomElement()
+        topView.wordTranslateLabel.text = russianWords.randomElement()
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGestureRecognizer)
         
         addNewWordButton.addTarget(self, action: #selector(addNewWordButtonAction(_:)), for: .touchUpInside)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        chekingLabel()
     }
     
     // MARK: - Private Methods
@@ -93,19 +87,8 @@ final class TrainingViewController: UIViewController {
         addNewWordButton.topAnchor.constraint(equalTo: topView.bottomAnchor, constant: -20).isActive = true
     }
     
-    @objc private func dismissKeyboard() {
-        view.endEditing(true)
-    }
-    
-    @objc private func addNewWordButtonAction(_ sender: UIButton) {
-        let navigationController = UINavigationController(rootViewController: WordBaseViewController())
-        navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: true, completion: nil)
-        bottomView.englishCustomTextField.text?.removeAll()
-    }
-    
     private func compareTranslations() {
-        let indexRussianСollection = russianhWords.firstIndex {
+        let indexRussianСollection = russianWords.firstIndex {
             $0 == topView.wordTranslateLabel.text
         }
         let indexEnglishСollection = englishWords.firstIndex {
@@ -113,7 +96,9 @@ final class TrainingViewController: UIViewController {
         }
         
         if indexRussianСollection == indexEnglishСollection {
-            topView.wordTranslateLabel.text = russianhWords.randomElement()
+            let distribution = GKShuffledDistribution(lowestValue: russianWords.startIndex, highestValue: russianWords.endIndex - 1)
+            topView.wordTranslateLabel.text = russianWords[distribution.nextInt()]
+            
             bottomView.englishCustomTextField.text?.removeAll()
             notifyResult(translate: true)
         } else if indexRussianСollection != indexEnglishСollection {
@@ -121,7 +106,7 @@ final class TrainingViewController: UIViewController {
         }
     }
     
-    func notifyResult(translate: Bool) {
+    private func notifyResult(translate: Bool) {
         switch translate {
         case true:
             UIView.animate(withDuration: 1) {
@@ -149,6 +134,26 @@ final class TrainingViewController: UIViewController {
             }
         }
     }
+    
+    private func chekingLabel() {
+        if russianWords.isEmpty == true {
+            bottomView.englishCustomTextField.isHidden = true
+            topView.wordTranslateLabel.text = "Create new words"
+        } else {
+            bottomView.englishCustomTextField.isHidden = false
+        }
+    }
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    @objc private func addNewWordButtonAction(_ sender: UIButton) {
+        let navigationController = UINavigationController(rootViewController: WordBaseViewController())
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true, completion: nil)
+        bottomView.englishCustomTextField.text?.removeAll()
+    }
 }
 
 // MARK: - TextFieldDelegate
@@ -161,4 +166,3 @@ extension TrainingViewController: UITextFieldDelegate {
         return true
     }
 }
-
