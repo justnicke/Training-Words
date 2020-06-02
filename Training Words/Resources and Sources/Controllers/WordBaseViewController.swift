@@ -18,7 +18,7 @@ final class WordBaseViewController: UIViewController {
     private var backBarButtonItem: UIBarButtonItem!
     private var addWordBarButtonItem: UIBarButtonItem!
     private var alertView: AlertView!
-    private var createdWords: [NewWord] = []
+    private var managedObjectNewWord: [NewWord] = []
     
     // MARK: - Public Methods
     
@@ -96,26 +96,30 @@ final class WordBaseViewController: UIViewController {
         alertView.addGestureRecognizer(tapGestureRecognizer)
     }
     
-    private func saveToCoreData(english: String, russian: String) {
+    private func saveViaCoreData() {
+        guard let english = alertView.engishWordTextField.text else { return }
+        guard let russian = alertView.russianWordTextField.text else { return }
+        
         let index = 0
         let newWord = NewWord(context: PersistenceService.context)
         newWord.englishWord = english
         newWord.russianWord = russian
+        
         PersistenceService.saveContext()
-        createdWords.insert(newWord, at: index)
+        managedObjectNewWord.insert(newWord, at: index)
+        
         let indexPath = IndexPath(row: index, section: 0)
         tableView.insertRows(at: [indexPath], with: .automatic)
     }
     
-    private func deleteWordToCoreData(indexPath: IndexPath) {
+    private func deleteWordViaCoreData(indexPath: IndexPath) {
         let context = PersistenceService.context
-        context.delete(createdWords[indexPath.row])
-        createdWords.remove(at: indexPath.row)
+        context.delete(managedObjectNewWord[indexPath.row])
+        managedObjectNewWord.remove(at: indexPath.row)
         
         do {
             try PersistenceService.context.save()
             tableView.reloadData()
-            print(createdWords)
         } catch {}
     }
 
@@ -124,7 +128,7 @@ final class WordBaseViewController: UIViewController {
         
         do {
             let createdWord = try PersistenceService.context.fetch(fetchRequest)
-            self.createdWords = createdWord.reversed()
+            self.managedObjectNewWord = createdWord.reversed()
             tableView.reloadData()
         } catch {}
     }
@@ -149,13 +153,13 @@ final class WordBaseViewController: UIViewController {
 
 extension WordBaseViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return createdWords.count
+        return managedObjectNewWord.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: WordCell.reuseId, for: indexPath) as! WordCell
-        cell.englishLabel.text = createdWords[indexPath.row].englishWord
-        cell.russianLabel.text = createdWords[indexPath.row].russianWord
+        cell.englishLabel.text = managedObjectNewWord[indexPath.row].englishWord
+        cell.russianLabel.text = managedObjectNewWord[indexPath.row].russianWord
         
         return cell
     }
@@ -164,18 +168,14 @@ extension WordBaseViewController: UITableViewDataSource, UITableViewDelegate {
         return 60
     }
     
-    private func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath!) -> Bool {
-        return true
-    }
-    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            deleteWordToCoreData(indexPath: indexPath)
+            deleteWordViaCoreData(indexPath: indexPath)
         }
     }
 }
 
-// MARK: - Extension ButtonDelegate
+// MARK: - Extension TappedButtonAlertDelegate
 
 extension WordBaseViewController: TappedButtonAlertDelegate {
     func cancelButtonTapped(sender: UIButton) {
@@ -183,15 +183,10 @@ extension WordBaseViewController: TappedButtonAlertDelegate {
         dismissKeyboard()
         alertView.engishWordTextField.text?.removeAll()
         alertView.russianWordTextField.text?.removeAll()
-        
-        print(createdWords)
     }
     
     func okButtonTapped(sender: UIButton) {
-        guard let english = alertView.engishWordTextField.text else { return }
-        guard let russian = alertView.russianWordTextField.text else { return }
-        
-        saveToCoreData(english: english, russian: russian)
+        saveViaCoreData()
         
         alertView.isHidden = true
         dismissKeyboard()
