@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import GameplayKit
 
 final class TrainingViewController: UIViewController {
     
@@ -28,7 +29,7 @@ final class TrainingViewController: UIViewController {
         super.viewDidLoad()
         overrideUserInterfaceStyle = .light
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-    
+        
         setupTopAndBottomView()
         setupAddNewWordButton()
         fetchRequest()
@@ -41,11 +42,16 @@ final class TrainingViewController: UIViewController {
         addNewWordButton.addTarget(self, action: #selector(addNewWordButtonAction(_:)), for: .touchUpInside)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        chekingLabel()
+    }
+    
     // MARK: - Private Methods
     
     private func fetchRequest() {
         let fetchRequest: NSFetchRequest<NewWord> = NewWord.fetchRequest()
-
+        
         do {
             let createdWord = try PersistenceService.context.fetch(fetchRequest)
             englishWords = createdWord.compactMap { $0.englishWord }
@@ -102,7 +108,10 @@ final class TrainingViewController: UIViewController {
         }
         
         if indexRussianСollection == indexEnglishСollection {
-            topView.wordTranslateLabel.text = russianhWords.randomElement()
+            let distribution = GKShuffledDistribution(lowestValue: russianhWords.startIndex, highestValue: russianhWords.endIndex - 1)
+            topView.wordTranslateLabel.text = russianhWords[distribution.nextInt()]
+            print(russianhWords)
+            
             bottomView.englishCustomTextField.text?.removeAll()
             notifyResult(translate: true)
         } else if indexRussianСollection != indexEnglishСollection {
@@ -136,6 +145,15 @@ final class TrainingViewController: UIViewController {
                     self.bottomView.notificationLabel.alpha = 0
                 }
             }
+        }
+    }
+    
+    private func chekingLabel() {
+        if russianhWords.isEmpty == true {
+            bottomView.englishCustomTextField.isHidden = true
+            topView.wordTranslateLabel.text = "Create new words"
+        } else {
+            bottomView.englishCustomTextField.isHidden = false
         }
     }
     
