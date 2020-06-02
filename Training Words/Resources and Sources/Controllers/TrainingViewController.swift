@@ -12,13 +12,13 @@ import CoreData
 final class TrainingViewController: UIViewController {
     
     // MARK: - Public Properties
-
+    
+    var topView: TopView!
     var englishWords = [String]()
     var russianhWords = [String]()
     
     // MARK: - Private Properties
     
-    var topView: TopView!
     private var bottomView: BottomView!
     private var addNewWordButton: UIButton!
     
@@ -26,6 +26,7 @@ final class TrainingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        overrideUserInterfaceStyle = .light
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     
         setupTopAndBottomView()
@@ -38,7 +39,6 @@ final class TrainingViewController: UIViewController {
         view.addGestureRecognizer(tapGestureRecognizer)
         
         addNewWordButton.addTarget(self, action: #selector(addNewWordButtonAction(_:)), for: .touchUpInside)
-
     }
     
     // MARK: - Private Methods
@@ -93,17 +93,6 @@ final class TrainingViewController: UIViewController {
         addNewWordButton.topAnchor.constraint(equalTo: topView.bottomAnchor, constant: -20).isActive = true
     }
     
-    @objc private func dismissKeyboard() {
-        view.endEditing(true)
-    }
-    
-    @objc private func addNewWordButtonAction(_ sender: UIButton) {
-        let navigationController = UINavigationController(rootViewController: WordBaseViewController())
-        navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: true, completion: nil)
-        bottomView.englishCustomTextField.text?.removeAll()
-    }
-    
     private func compareTranslations() {
         let indexRussianСollection = russianhWords.firstIndex {
             $0 == topView.wordTranslateLabel.text
@@ -121,7 +110,7 @@ final class TrainingViewController: UIViewController {
         }
     }
     
-    func notifyResult(translate: Bool) {
+    private func notifyResult(translate: Bool) {
         switch translate {
         case true:
             UIView.animate(withDuration: 1) {
@@ -148,6 +137,17 @@ final class TrainingViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    @objc private func addNewWordButtonAction(_ sender: UIButton) {
+        let navigationController = UINavigationController(rootViewController: WordBaseViewController())
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true, completion: nil)
+        bottomView.englishCustomTextField.text?.removeAll()
     }
 }
 
