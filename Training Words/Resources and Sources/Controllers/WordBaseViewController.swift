@@ -134,9 +134,11 @@ final class WordBaseViewController: UIViewController {
     }
     
     @objc private func backBarButtomAction(_ sender: UIBarButtonItem) {
-//        if let presenter = presentingViewController as? TrainingViewController {
-//
-//        }
+        if let presenter = presentingViewController as? TrainingViewController {
+            presenter.englishWords = managedObjectNewWord.compactMap { $0.englishWord }
+            presenter.russianhWords = managedObjectNewWord.compactMap { $0.russianWord }
+            presenter.topView.wordTranslateLabel.text = presenter.russianhWords.randomElement()
+        }
         dismiss(animated: true, completion: nil)
     }
     
