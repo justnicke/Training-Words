@@ -11,10 +11,6 @@ import CoreData
 
 final class WordBaseViewController: UIViewController {
     
-    // MARK: - Public Properties
-    
-    var createdWords: [NewWord] = []
-    
     // MARK: - Private Properties
     
     private var tableView: UITableView!
@@ -22,13 +18,14 @@ final class WordBaseViewController: UIViewController {
     private var backBarButtonItem: UIBarButtonItem!
     private var addWordBarButtonItem: UIBarButtonItem!
     private var alertView: AlertView!
+    private var createdWords: [NewWord] = []
     
     // MARK: - Public Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = #colorLiteral(red: 0.866422236, green: 0.9141893983, blue: 0.9915274978, alpha: 1)
+        overrideUserInterfaceStyle = .light
+        view.backgroundColor = .clear
         
         setupTableView()
         setupNavigationController()
@@ -42,11 +39,11 @@ final class WordBaseViewController: UIViewController {
         tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
-        tableView.backgroundColor = #colorLiteral(red: 0.866422236, green: 0.9141893983, blue: 0.9915274978, alpha: 1)
+        tableView.backgroundColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = .singleLine
-        tableView.separatorColor = #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1)
+        tableView.tableFooterView = UIView()
         
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -57,8 +54,11 @@ final class WordBaseViewController: UIViewController {
     }
     
     private func setupNavigationController() {
-        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.866422236, green: 0.9141893983, blue: 0.9915274978, alpha: 1)
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
         navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "AvenirNext-DemiBold", size: 17)!]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         navigationItem.title = "Word Base"
         
@@ -79,13 +79,13 @@ final class WordBaseViewController: UIViewController {
         navigationItem.rightBarButtonItem = addWordBarButtonItem
         
         [addWordBarButtonItem, backBarButtonItem].forEach {
-            $0?.tintColor = .black
+            $0?.tintColor = .white
         }
     }
     
     private func setupAlertView() {
         alertView = AlertView(frame: CGRect(x: view.frame.width / 21.99,
-                                            y: view.frame.width / 2,
+                                            y: view.frame.width / 3,
                                             width: view.frame.width / 1.1,
                                             height: view.frame.height / 2.5))
         view.addSubview(alertView)
