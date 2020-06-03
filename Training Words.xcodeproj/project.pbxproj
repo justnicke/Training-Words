@@ -18,6 +18,7 @@
 		5E1A3415247CFE8E00BFE652 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1A3409247CFE8E00BFE652 /* AlertView.swift */; };
 		5E1A3416247CFE8E00BFE652 /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1A340A247CFE8E00BFE652 /* BottomView.swift */; };
 		5E1A3417247CFE8E00BFE652 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1A340B247CFE8E00BFE652 /* TopView.swift */; };
+		5E5481D52487C008009E208C /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5481D42487C008009E208C /* Storage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		5E1A3409247CFE8E00BFE652 /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		5E1A340A247CFE8E00BFE652 /* BottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
 		5E1A340B247CFE8E00BFE652 /* TopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
+		5E5481D42487C008009E208C /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		5EB4667C2474231D006812F9 /* Training Words.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Training Words.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -74,6 +76,7 @@
 			children = (
 				5E1A3401247CFE8E00BFE652 /* TrainingViewController.swift */,
 				5E1A3402247CFE8E00BFE652 /* WordBaseViewController.swift */,
+				5E5481D42487C008009E208C /* Storage.swift */,
 				5E1A3403247CFE8E00BFE652 /* Custom */,
 			);
 			path = Controllers;
@@ -217,6 +220,7 @@
 				5E1A3414247CFE8E00BFE652 /* WordCell.swift in Sources */,
 				5E1A3410247CFE8E00BFE652 /* SceneDelegate.swift in Sources */,
 				5E1A3413247CFE8E00BFE652 /* CustomTextField.swift in Sources */,
+				5E5481D52487C008009E208C /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
