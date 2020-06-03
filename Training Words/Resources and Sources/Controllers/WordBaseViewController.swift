@@ -8,12 +8,6 @@
 
 import UIKit
 
-struct UserDefaultsKeys {
-    static let ruArr = "ru"
-    static let enArr = "en"
-}
-
-
 final class WordBaseViewController: UIViewController {
     
     // MARK: - Private Properties
@@ -25,7 +19,6 @@ final class WordBaseViewController: UIViewController {
     private var alertView: AlertView!
     private var englishWords: [String] = []
     private var russianWords: [String] = []
-    private let defaults = UserDefaults.standard
     
     // MARK: - Public Methods
     
@@ -37,9 +30,8 @@ final class WordBaseViewController: UIViewController {
         setupTableView()
         setupNavigationController()
         setupAlertView()
-        
-        checkForSavedName()
-        
+        getWords()
+
         print(englishWords)
         print(russianWords)
     }
@@ -107,39 +99,35 @@ final class WordBaseViewController: UIViewController {
         alertView.addGestureRecognizer(tapGestureRecognizer)
     }
     
-    private func save() {
+    private func saveNewWord() {
         guard let english = alertView.engishWordTextField.text else { return }
         guard let russian = alertView.russianWordTextField.text else { return }
-       
+        
         let index = 0
         englishWords.insert(english, at: index)
         russianWords.insert(russian, at: index)
         let indexPath = IndexPath(row: index, section: 0)
         tableView.insertRows(at: [indexPath], with: .automatic)
-        saveName()
+        
+        Storage.save(englishWord: englishWords, russianWord: russianWords)
     }
     
-    private func deleteCell(indexPath: IndexPath) {
-        let enString = englishWords[indexPath.row]
-        deletWordFromUserdefaults(array: englishWords, userDefaultsKey: UserDefaultsKeys.enArr, string: enString)
-
-        let ruString = russianWords[indexPath.row]
-        deletWordFromUserdefaults(array: russianWords, userDefaultsKey: UserDefaultsKeys.ruArr, string: ruString)
+    private func deleteWord(indexPath: IndexPath) {
+        let enWord = englishWords[indexPath.row]
+        Storage.remove(from: englishWords, by: UserDefaultsKeys.englishWords, selectedWord: enWord)
+        
+        let ruWord = russianWords[indexPath.row]
+        Storage.remove(from: russianWords, by: UserDefaultsKeys.russianWords, selectedWord: ruWord)
         
         englishWords.remove(at: indexPath.row)
         russianWords.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .automatic)
-
     }
     
-    func deletWordFromUserdefaults(array: [String], userDefaultsKey: String, string: String) {
-        var words = array
-        words = defaults.stringArray(forKey: userDefaultsKey) ?? [String]()
-        if words.contains(string) {
-            words.remove(at: words.firstIndex(of: string)!)
-        }
-        defaults.set(words, forKey: userDefaultsKey)
-        
+    private func getWords() {
+        let word = Storage.words()
+        englishWords = word.en
+        russianWords = word.ru
     }
     
     @objc private func backBarButtomAction(_ sender: UIBarButtonItem) {
@@ -158,20 +146,6 @@ final class WordBaseViewController: UIViewController {
     @objc private func dismissKeyboard() {
         alertView.endEditing(true)
     }
-    
-    func saveName() {
-        defaults.set(englishWords, forKey: UserDefaultsKeys.enArr)
-        defaults.set(russianWords, forKey: UserDefaultsKeys.ruArr)
-    }
-
-    func checkForSavedName() {
-        let enArr = defaults.object(forKey: UserDefaultsKeys.enArr) as? [String] ?? [String]()
-        englishWords = enArr
-        
-        let ruArr = defaults.object(forKey: UserDefaultsKeys.ruArr) as? [String] ?? [String]()
-        russianWords = ruArr
-    }
-
 }
 
 // MARK: - Extension TableViewDataSource and Delegate
@@ -195,7 +169,7 @@ extension WordBaseViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            deleteCell(indexPath: indexPath)
+            deleteWord(indexPath: indexPath)
         }
     }
 }
@@ -211,7 +185,7 @@ extension WordBaseViewController: TappedButtonAlertDelegate {
     }
     
     func okButtonTapped(sender: UIButton) {
-        save()
+        saveNewWord()
         
         alertView.isHidden = true
         dismissKeyboard()

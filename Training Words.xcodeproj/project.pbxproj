@@ -52,6 +52,7 @@
 		5E1A33F8247CFE8E00BFE652 /* Resources and Sources */ = {
 			isa = PBXGroup;
 			children = (
+				5E5481D6248819E9009E208C /* Services */,
 				5E1A3405247CFE8E00BFE652 /* Views */,
 				5E1A3400247CFE8E00BFE652 /* Controllers */,
 				5E1A33F9247CFE8E00BFE652 /* Supporting Files */,
@@ -76,7 +77,6 @@
 			children = (
 				5E1A3401247CFE8E00BFE652 /* TrainingViewController.swift */,
 				5E1A3402247CFE8E00BFE652 /* WordBaseViewController.swift */,
-				5E5481D42487C008009E208C /* Storage.swift */,
 				5E1A3403247CFE8E00BFE652 /* Custom */,
 			);
 			path = Controllers;
@@ -115,6 +115,14 @@
 				5E1A340B247CFE8E00BFE652 /* TopView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		5E5481D6248819E9009E208C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5E5481D42487C008009E208C /* Storage.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		5EB466732474231D006812F9 = {

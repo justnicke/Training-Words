@@ -38,6 +38,7 @@ final class TrainingViewController: UIViewController {
         view.addGestureRecognizer(tapGestureRecognizer)
         
         addNewWordButton.addTarget(self, action: #selector(addNewWordButtonAction(_:)), for: .touchUpInside)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
