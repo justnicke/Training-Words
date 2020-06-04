@@ -30,10 +30,7 @@ final class WordBaseViewController: UIViewController {
         setupTableView()
         setupNavigationController()
         setupAlertView()
-        getWords()
-
-        print(englishWords)
-        print(russianWords)
+        getWordsFromUserDefaults()
     }
     
     // MARK: - Private Methods
@@ -124,18 +121,13 @@ final class WordBaseViewController: UIViewController {
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
-    private func getWords() {
+    private func getWordsFromUserDefaults() {
         let word = Storage.words()
         englishWords = word.en
         russianWords = word.ru
     }
     
     @objc private func backBarButtomAction(_ sender: UIBarButtonItem) {
-        if let presenter = presentingViewController as? TrainingViewController {
-            presenter.englishWords = englishWords
-            presenter.russianWords = russianWords
-            presenter.topView.wordTranslateLabel.text = presenter.russianWords.randomElement()
-        }
         dismiss(animated: true, completion: nil)
     }
     

@@ -32,20 +32,19 @@ final class TrainingViewController: UIViewController {
         setupTopAndBottomView()
         setupAddNewWordButton()
         
-        topView.wordTranslateLabel.text = russianWords.randomElement()
-        
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGestureRecognizer)
         
         addNewWordButton.addTarget(self, action: #selector(addNewWordButtonAction(_:)), for: .touchUpInside)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
+        getWordsFromUserDefaults()
         chekingLabel()
     }
-    
+        
     // MARK: - Private Methods
     
     private func setupTopAndBottomView() {
@@ -145,6 +144,13 @@ final class TrainingViewController: UIViewController {
         }
     }
     
+    private func getWordsFromUserDefaults() {
+        let word = Storage.words()
+        englishWords = word.en
+        russianWords = word.ru
+        topView.wordTranslateLabel.text = russianWords.randomElement()
+    }
+    
     @objc private func dismissKeyboard() {
         view.endEditing(true)
     }
@@ -155,6 +161,7 @@ final class TrainingViewController: UIViewController {
         present(navigationController, animated: true, completion: nil)
         bottomView.englishCustomTextField.text?.removeAll()
     }
+    
 }
 
 // MARK: - TextFieldDelegate
