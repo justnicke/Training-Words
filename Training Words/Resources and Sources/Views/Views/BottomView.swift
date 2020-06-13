@@ -38,7 +38,7 @@ final class BottomView: UIView {
         notificationLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(notificationLabel)
         
-        notificationLabel.text = "Correctly"
+        notificationLabel.text = "Wrong"
         notificationLabel.font = UIFont(name: "AvenirNext-medium", size: 20)
         notificationLabel.textAlignment = .center
         notificationLabel.textColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)

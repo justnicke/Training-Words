@@ -14,8 +14,72 @@ final class TrainingViewController: UIViewController {
     // MARK: - Public Properties
     
     var topView: TopView!
-    var englishWords = [String]()
-    var russianWords = [String]()
+//    var englishWords = [String]()
+//    var russianWords = [String]()
+    
+    var englishWords = ["the costs",
+                        "get tired",
+                        "achieve",
+                        "aim",
+                        "think it over",
+                        "grateful to",
+                        "some",
+                        "explain to",
+                        "repair",
+                        "something",
+                        "follow",
+                        "greatly",
+                        "disappointed",
+                        "forgive",
+                        "hurry up",
+                        "lend",
+                        "somehow",
+                        "borrow",
+                        "authorities",
+                        "apologize",
+                        "devote",
+                        "confuse",
+                        "regret",
+                        "measures",
+                        "punish",
+                        "pass",
+                        "lead to",
+                        "interrupt",
+                        "take part",
+                        "compete", "influence", "anymore", "deny", "insist", "notice", "absence", "the only", "approach", "react to", "fly to", "produce", "will be able", "could", "manage", "belong to", "whose", "mention", "pronunciation", "catch", "guess", "look up", "look at", "impress", "at last", "express", "satisfy", "satisfaction", "attitude to", "point at", "last forever", "the day after tomorrow", "in the beginning", "in the end", "at the beginning", "at the end", "available", "get dark", "sign", "threat"]
+    var russianWords = ["издержки",
+                        "уставать",
+                        "достигать",
+                        "цель",
+                        "обдумывать это",
+                        "благодарны кому-то",
+                        "несколько / некоторые",
+                        "объяснять кому-то",
+                        "починить",
+                        "что-то",
+                        "следовать, последовать",
+                        "очень сильно",
+                        "расстроенный, разочарованный",
+                        "простить",
+                        "торопиться / спешить",
+                        "одолжить",
+                        "как-то",
+                        "занимать",
+                        "власти",
+                        "извиняться",
+                        "уделять",
+                        "путать",
+                        "желеть / пожелеет",
+                        "меры",
+                        "наказать",
+                        "проходить / сдавать",
+                        "привести к чему-то",
+                        "перебивать",
+                        "принемать участие", "конкурировать", "влиять", "более / больше (в отрицании)", "отрицать", "настаивать", "замечать", "отсутствие", "единственный", "подход", "реагировать на что-то", "лететь в", "производить", "смочь", "мог", "суметь", "принадлежать кому-то", "чей", "упоминать", "произношение", "поймать, ловить", "отгадать", "посмотреть где-то", "посмотреть на кого-то / что-то", "впечатлять", "наконец", "выражать", "удовлетворять", "удвалетворение", "отношение к кому чему-то", "указывать на что-то", "длится вечно", "после завтра", "в начале", "в конце", "в начале чего-то", "в конце чего-то", "доступен, доступен", "темнеть", "подписать", "угроза"]
+    
+    let helpButton = UIButton(type: .system)
+    let promptButton = UIButton(type: .system)
+    var сountTaps = 0
     
     // MARK: - Private Properties
     
@@ -31,17 +95,23 @@ final class TrainingViewController: UIViewController {
         
         setupTopAndBottomView()
         setupAddNewWordButton()
+        setupHelpersAndPromptButtons()
+        
+        topView.wordTranslateLabel.text = russianWords.randomElement()
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGestureRecognizer)
         
         addNewWordButton.addTarget(self, action: #selector(addNewWordButtonAction(_:)), for: .touchUpInside)
+        
+        helpButton.addTarget(self, action: #selector(helpButtonTapped(_:)), for: .touchUpInside)
+        promptButton.addTarget(self, action: #selector(promptButtonTapped(_:)), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        getWordsFromUserDefaults()
+//        getWordsFromUserDefaults()
         chekingLabel()
     }
         
@@ -113,6 +183,7 @@ final class TrainingViewController: UIViewController {
                 self.bottomView.notificationLabel.text = "Correctly"
                 self.bottomView.notificationLabel.textColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
                 self.bottomView.notificationLabel.alpha = 1
+                self.helpButton.setTitle("Help", for: .normal)
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
@@ -173,4 +244,67 @@ extension TrainingViewController: UITextFieldDelegate {
         }
         return true
     }
+}
+
+extension TrainingViewController {
+    
+    @objc private func helpButtonTapped(_ sender: UIButton) {
+        let indexRussianСollection = russianWords.firstIndex { $0 == topView.wordTranslateLabel.text }
+//        print(englishWords[indexRussianСollection!])
+        
+        helpButton.setTitle(englishWords[indexRussianСollection!], for: .normal)
+    }
+    
+    @objc private func promptButtonTapped(_ sender: UIButton) {
+        let indexRussianСollection = russianWords.firstIndex { $0 == topView.wordTranslateLabel.text }
+        let word = englishWords[indexRussianСollection!]
+        
+        сountTaps += 1
+        
+        var count = сountTaps 
+        
+        
+        promptButton.setTitle(word, for: .normal)
+        
+        let i = word.index(word.startIndex, offsetBy: count)
+        let char = word[i]
+        print(char)
+        
+        if сountTaps == word.count {
+            promptButton.setTitle("Show a letter", for: .normal)
+            сountTaps = 0
+        }
+    }
+    
+    func promptChar(touchNum: Int, word: String) {
+        
+        let i = word.index(word.startIndex, offsetBy: touchNum)
+        
+        
+    }
+    
+    private func setupHelpersAndPromptButtons() {
+        [helpButton, promptButton].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.backgroundColor = .systemBlue
+            $0.tintColor = .white
+            $0.layer.cornerRadius = 10
+            view.addSubview($0)
+        }
+        
+        helpButton.setTitle("Help", for: .normal)
+        helpButton.topAnchor.constraint(equalTo: bottomView.bottomAnchor, constant: 10).isActive = true
+        helpButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        helpButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        helpButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        
+        promptButton.setTitle("Show a letter", for: .normal)
+        promptButton.topAnchor.constraint(equalTo: helpButton.bottomAnchor, constant: 10).isActive = true
+        promptButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        promptButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        promptButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        
+    }
+    
+    
 }
