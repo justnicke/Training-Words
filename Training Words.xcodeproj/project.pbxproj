@@ -22,6 +22,8 @@
 		5E1A341E247D323B00BFE652 /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1A341D247D323B00BFE652 /* PersistenceService.swift */; };
 		5E1A3421247D36DA00BFE652 /* NewWord+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1A341F247D36DA00BFE652 /* NewWord+CoreDataClass.swift */; };
 		5E1A3422247D36DA00BFE652 /* NewWord+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1A3420247D36DA00BFE652 /* NewWord+CoreDataProperties.swift */; };
+		5E762E9924E311BD005C1D7B /* ShowApp.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5E762E9824E311BD005C1D7B /* ShowApp.gif */; };
+		5E762E9B24E311C2005C1D7B /* Screen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5E762E9A24E311C2005C1D7B /* Screen.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,9 @@
 		5E1A341D247D323B00BFE652 /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
 		5E1A341F247D36DA00BFE652 /* NewWord+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewWord+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5E1A3420247D36DA00BFE652 /* NewWord+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewWord+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5E762E9824E311BD005C1D7B /* ShowApp.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ShowApp.gif; sourceTree = "<group>"; };
+		5E762E9A24E311C2005C1D7B /* Screen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Screen.jpg; sourceTree = "<group>"; };
+		5E762E9C24E311F9005C1D7B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		5EB4667C2474231D006812F9 /* Training Words.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Training Words.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -153,6 +158,9 @@
 		5EB466732474231D006812F9 = {
 			isa = PBXGroup;
 			children = (
+				5E762E9A24E311C2005C1D7B /* Screen.jpg */,
+				5E762E9C24E311F9005C1D7B /* README.md */,
+				5E762E9824E311BD005C1D7B /* ShowApp.gif */,
 				5EB4667E2474231D006812F9 /* Training Words */,
 				5EB4667D2474231D006812F9 /* Products */,
 			);
@@ -232,6 +240,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E762E9924E311BD005C1D7B /* ShowApp.gif in Resources */,
+				5E762E9B24E311C2005C1D7B /* Screen.jpg in Resources */,
 				5E1A340D247CFE8E00BFE652 /* LaunchScreen.storyboard in Resources */,
 				5E1A340C247CFE8E00BFE652 /* Assets.xcassets in Resources */,
 			);
